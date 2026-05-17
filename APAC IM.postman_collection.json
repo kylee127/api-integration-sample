@@ -1,0 +1,4168 @@
+{
+  "info": {
+    "_postman_id": "953ee9c2-c043-4d91-b9eb-d813d26d81f0",
+    "name": "APAC IM",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22956505"
+  },
+  "item": [
+    {
+      "name": "Pay Station API",
+      "item": [
+        {
+          "name": "Token",
+          "item": [
+            {
+              "name": "Create token for basic",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"project_id\": {{project_id}}\n    ,\"mode\":\"sandbox\"\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    },\n    \"country\":{\n        \"value\":\"HK\"\n    },\n    \"email\":{\n        \"value\":\"{{email}}\"\n    }\n  },\n  \"purchase\":{\n    \"checkout\":{\n        \"amount\": 1,\n        \"currency\": \"USD\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create token",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"currency\": \"KRW\",\n    \"language\": \"ko\",\n    \"project_id\": {{project_id}},\n    \"mode\": \"sandbox\",\n    //\"disable_saved_methods\": true, //whether saved methods on/off\n    \"tax_inclusive\": true, //who spend tax, merchant or user\n    //\"payment_method\": 1148,\n    \"sdk\":{\n        \"browser_type\":\"custom_tabs\",\n        \"platform\":\"android\"\n    },\n    \"ui\":{\n        \"is_prevent_external_link_open\":false,\n        \"version\": \"mobile\",\n        \"white_label\": true,\n        \"desktop\":{\n            \"header\":{\n                \"close_button\": true,    //not working in paystation embed\n                \"close_button_icon\": \"arrow\", //arrow or cross\n                \"is_visible\": true\n                //,\"visible_logo\": false,\n                //\"visible_name\": true,\n                //\"visible_purchase\": false,\n                //\"type\": \"compact\"\n            }\n        },\n        \"is_payment_methods_list_mode\": true,\n        \"is_search_field_hidden\": true\n    }\n  },\n  \"user\": {\n    \"email\": {\n      \"value\": \"{{email}}\"\n    },\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n      ,\"hidden\": true //Not working\n    },\n    /*\"name\": {\n      \"value\": \"Peter Lee\"\n      ,\"hidden\": true  //Not working\n    },*/\n    \"country\":{\n      \"value\": \"KR\"\n    },\n    \"mobile_app\":{\n        \"platform\":\"android\"\n    }\n  },\n  \"purchase\":{\n    \"checkout\":{\n        \"amount\": 10,\n        \"currency\": \"USD\"\n    },\n    \"description\":{\n        \"items\":[{\n            \"name\":\"Item Name\",\n            \"image_url\":\"https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png\",\n            \"price\":{\n                \"amount\":\"10\",\n                \"amount_before_discount\":\"30\"\n            },\n            \"description\":\"testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest\"\n        }]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Tokenization",
+          "item": [
+            {
+              "name": "User_account UI",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"currency\": \"USD\",\n    \"language\": \"en\",\n    \"project_id\": {{project_id}},\n    \"ui\":{\n        \"mode\": \"user_account\"\n    },\n    \"mode\": \"sandbox\",\n    \"redirect_policy\":{\n        \"manual_redirection_action\": \"postmessage\"\n    }\n  },\n  \"user\": {\n    \"email\": {\n      \"value\": \"{{email}}\"\n    },\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    },\n    \"name\": {\n      \"value\": \"Peter Lee\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get saved accounts",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/users/{{user_id}}/payment_accounts?mode=sandbox",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "projects",
+                    "{{project_id}}",
+                    "users",
+                    "{{user_id}}",
+                    "payment_accounts"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "sandbox",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Charge with saved account",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful POST request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"purchase\": {\n    \"description\": {\n      \"value\": \"Tokenization test purchase\"\n    },\n    \"checkout\": {\n      \"currency\": \"USD\",\n      \"amount\": 1\n    }\n  },\n  \"settings\": {\n    \"currency\": \"USD\",\n    \"mode\": \"sandbox\"\n  },\n  \"user\": {\n    \"ip\": \"1.228.14.57\",\n    \"name\": \"Peter Lee\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/users/{{user_id}}/payments/card/32471828",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "projects",
+                    "{{project_id}}",
+                    "users",
+                    "{{user_id}}",
+                    "payments",
+                    "card",
+                    "32471828"
+                  ]
+                },
+                "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Delete saved account",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful DELETE request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/users/{{user_id}}/payment_accounts/card/32471828",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "projects",
+                    "{{project_id}}",
+                    "users",
+                    "{{user_id}}",
+                    "payment_accounts",
+                    "card",
+                    "32471828"
+                  ]
+                },
+                "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Reports",
+          "item": [
+            {
+              "name": "Find transactions",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports/transactions/search.json?datetime_from=2025-04-01T00:00:00Z&datetime_to=2025-06-26T00:00:00Z&project_id={{project_id}}&type=all&status=done",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports",
+                    "transactions",
+                    "search.json"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_from",
+                      "value": "2025-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_to",
+                      "value": "2025-06-26T00:00:00Z"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "{{project_id}}"
+                    },
+                    {
+                      "key": "type",
+                      "value": "all"
+                    },
+                    {
+                      "key": "status",
+                      "value": "done"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Find transactions_ncsoft",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "0594b26d4ab02283a94bfff6066d12a378806c8a",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "205367",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/205367/reports/transactions/search.json?datetime_from=2024-03-01&external_id=G202403184557620&datetime_to=2024-03-19",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "205367",
+                    "reports",
+                    "transactions",
+                    "search.json"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_from",
+                      "value": "2024-03-01"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "{{project_id}}",
+                      "disabled": true
+                    },
+                    {
+                      "key": "type",
+                      "value": "all",
+                      "disabled": true
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "G202403184557620"
+                    },
+                    {
+                      "key": "datetime_to",
+                      "value": "2024-03-19"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Get transaction_ncsoft",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "0594b26d4ab02283a94bfff6066d12a378806c8a",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "205367",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/205367/reports/transactions/1378502363/details",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "205367",
+                    "reports",
+                    "transactions",
+                    "1378502363",
+                    "details"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Get transaction",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports/transactions/{{transaction_id}}/details",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports",
+                    "transactions",
+                    "{{transaction_id}}",
+                    "details"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Get transactions",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports/transactions/registry.json?datetime_from=2025-04-01T00:00:00Z&datetime_to=2025-06-26T00:00:00Z&in_transfer_currency=false&show_total=true&merchant_of_records=xsolla&project_id={{project_id}}&show_dry_run=true&status=canceled&limit=10&offset=0",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports",
+                    "transactions",
+                    "registry.json"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_from",
+                      "value": "2025-04-01T00:00:00Z"
+                    },
+                    {
+                      "key": "datetime_to",
+                      "value": "2025-06-26T00:00:00Z"
+                    },
+                    {
+                      "key": "in_transfer_currency",
+                      "value": "false",
+                      "description": "1: true, 0: false"
+                    },
+                    {
+                      "key": "show_total",
+                      "value": "true"
+                    },
+                    {
+                      "key": "merchant_of_records",
+                      "value": "xsolla"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "{{project_id}}"
+                    },
+                    {
+                      "key": "show_dry_run",
+                      "value": "true"
+                    },
+                    {
+                      "key": "status",
+                      "value": "canceled",
+                      "description": "\"done\" \"canceled\" \"error\" \"refunded\""
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Request refund",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"description\": \"Test full refund after partial refunded.\",\n    \"email\": \"p.lee@xsolla.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports/transactions/1739160020/refund",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports",
+                    "transactions",
+                    "1739160020",
+                    "refund"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Request partial refund",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"refund_amount\": 0.02,\n    \"description\": \"test partual refund request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports/transactions/1739165236/partial_refund",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports",
+                    "transactions",
+                    "1739165236",
+                    "partial_refund"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Get reports",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/reports?datetime_from=2025-01-01&datetime_to=2025-02-28",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "key": "datetime_from",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "datetime_to",
+                      "value": "2025-02-28"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Login",
+      "item": [
+        {
+          "name": "Generate JWT",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Shop Builder API",
+      "item": [
+        {
+          "name": "Promo Code",
+          "item": [
+            {
+              "name": "Create promo code promotion",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful POST request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date_end\": \"2024-09-03T00:00:00+09:00\",\n  \"date_start\": \"2024-09-30T23:59:59+09:00\",\n  \"discount\": {\n    \"percent\": \"10.00\"\n  },\n  \"discounted_items\": [\n    {\n      \"discount\": {\n        \"percent\": \"10.00\"\n      },\n      \"sku\": \"IOm1fs3K\"\n    }\n  ],\n  \"external_id\": \"subpromo\",\n  \"name\": {\n    \"de-DE\": \"Sub PromoCode\",\n    \"en-US\": \"Sub PromoCode\"\n  },\n  \"redeem_code_limit\": 10,\n  \"redeem_total_limit\": 10,\n  \"redeem_user_limit\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/promocode",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "promocode"
+                  ]
+                },
+                "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "CART & PAYMENT",
+          "item": [
+            {
+              "name": "CART",
+              "item": [
+                {
+                  "name": "Get current user's cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status code is 200\", function () {",
+                          "    pm.response.to.have.status(200);",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3cUx4MDUyRleQld8bX56RmyqlLiA8_bg_E9ACE7_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/cart?currency=USD&locale=en",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "cart"
+                      ],
+                      "query": [
+                        {
+                          "key": "currency",
+                          "value": "USD"
+                        },
+                        {
+                          "key": "locale",
+                          "value": "en"
+                        }
+                      ]
+                    },
+                    "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get cart by cart ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status code is 200\", function () {",
+                          "    pm.response.to.have.status(200);",
+                          "});"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3cUx4MDUyRleQld8bX56RmyqlLiA8_bg_E9ACE7_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/cart/002",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "cart",
+                        "002"
+                      ]
+                    },
+                    "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Fill cart with items and prices",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful PUT request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "password",
+                          "value": "{{api_key}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "username",
+                          "value": "{{merchant_id}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-user-for",
+                        "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"currency\": \"USD\",\n    \"items\": [\n      {\n        \"sku\": \"usd\",\n        \"quantity\": 1\n      },\n      {\n        \"sku\": \"jpy\",\n        \"quantity\": 1\n      }\n    ]\n  }",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/admin/project/{{project_id}}/cart/fill",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "admin",
+                        "project",
+                        "{{project_id}}",
+                        "cart",
+                        "fill"
+                      ]
+                    },
+                    "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Fill cart by cart ID with items and prices",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful PUT request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "password",
+                          "value": "{{api_key}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "username",
+                          "value": "{{merchant_id}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-user-for",
+                        "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"currency\": \"USD\",\n    \"items\": [\n      {\n        \"sku\": \"usd\",\n        \"quantity\": 1\n      },\n      {\n        \"sku\": \"jpy\",\n        \"quantity\": 1\n      }\n    ]\n  }",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/admin/project/{{project_id}}/cart/001/fill",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "admin",
+                        "project",
+                        "{{project_id}}",
+                        "cart",
+                        "001",
+                        "fill"
+                      ]
+                    },
+                    "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete all cart items from current cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful PUT request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/cart/clear",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "cart",
+                        "clear"
+                      ]
+                    },
+                    "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete all cart items by cart ID",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful DELETE request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [],
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/cart/001/clear",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "cart",
+                        "001",
+                        "clear"
+                      ]
+                    },
+                    "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "PAYMENT",
+              "item": [
+                {
+                  "name": "server-side",
+                  "item": [
+                    {
+                      "name": "Create payment token for purchase(default)",
+                      "event": [
+                        {
+                          "listen": "test",
+                          "script": {
+                            "exec": [
+                              "pm.test(\"Successful POST request\", function () {",
+                              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                              "});",
+                              ""
+                            ],
+                            "type": "text/javascript",
+                            "packages": {}
+                          }
+                        }
+                      ],
+                      "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                          "connection": true,
+                          "accept-encoding": true,
+                          "accept": true,
+                          "user-agent": true
+                        },
+                        "removeRefererHeaderOnRedirect": false,
+                        "disableUrlEncoding": true,
+                        "followRedirects": false,
+                        "followOriginalHttpMethod": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "password",
+                              "value": "{{api_key}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "username",
+                              "value": "{{merchant_id}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-User-Ip",
+                            "value": "27.110.13.170"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    },\n    \"name\": {\n      \"value\": \"Peter Lee\"\n    }\n  },\n  \"purchase\": {\n    \"items\": [\n      {\n        \"sku\": \"{{item_sku}}\",\n        \"quantity\": 1\n      }\n    ]\n  },\n  \"settings\": {\n    \"language\": \"en\",\n    \"currency\": \"USD\"\n  },\n  \"sandbox\": true\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{StoreAPIUrl}}/api/v3/project/{{project_id}}/admin/payment/token",
+                          "host": [
+                            "{{StoreAPIUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v3",
+                            "project",
+                            "{{project_id}}",
+                            "admin",
+                            "payment",
+                            "token"
+                          ]
+                        },
+                        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create payment token for purchase(All parmeters)",
+                      "event": [
+                        {
+                          "listen": "test",
+                          "script": {
+                            "exec": [
+                              "pm.test(\"Successful POST request\", function () {",
+                              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                              "});",
+                              ""
+                            ],
+                            "type": "text/javascript",
+                            "packages": {}
+                          }
+                        }
+                      ],
+                      "protocolProfileBehavior": {
+                        "disabledSystemHeaders": {
+                          "connection": true,
+                          "accept-encoding": true,
+                          "accept": true,
+                          "user-agent": true
+                        },
+                        "removeRefererHeaderOnRedirect": false,
+                        "disableUrlEncoding": true,
+                        "followRedirects": false,
+                        "followOriginalHttpMethod": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "password",
+                              "value": "{{api_key}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "username",
+                              "value": "{{merchant_id}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "X-User-Ip",
+                            "value": "27.110.13.170"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    },\n    \"name\": {\n      \"value\": \"Peter Lee\"\n    }\n  },\n  \"purchase\": {\n    \"items\": [\n      {\n        \"sku\": \"{{item_sku}}\",\n        \"quantity\": 1\n      }\n    ]\n  },\n  \"settings\": {\n    \"language\": \"en\",\n    \"currency\": \"USD\"\n  },\n  \"sandbox\": true\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{StoreAPIUrl}}/api/v3/project/{{project_id}}/admin/payment/token",
+                          "host": [
+                            "{{StoreAPIUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v3",
+                            "project",
+                            "{{project_id}}",
+                            "admin",
+                            "payment",
+                            "token"
+                          ]
+                        },
+                        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+                      },
+                      "response": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Create order with specified item",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful POST request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3PGVDNUSwid7NXlQ8Cho0G9KLqP8d_bg_FFFFFF_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"sandbox\": true,\n  \"quantity\": 1,\n  \"settings\": {\n    \"ui\": {\n      \"theme\": \"63295a9a2e47fab76f7708e1\"\n      ,\"desktop\": {\n        \"header\": {\n          \"is_visible\": true\n        }\n      /*,\"desktop\": {\n        \"header\": {\n          \"is_visible\": false,\n          \"visible_logo\": false,\n          \"visible_name\": false,\n          \"visible_purchase\": false,\n          \"type\": \"compact\",\n          \"close_button\": false\n        }*/\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/payment/item/{{item_sku}}",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "payment",
+                        "item",
+                        "{{item_sku}}"
+                      ]
+                    },
+                    "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create order with all items from current cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful POST request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"sandbox\": true,\n    \"currency\": \"KRW\",\n    \"locale\": \"ko\",\n    \"country\": \"KR\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/payment/cart",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "payment",
+                        "cart"
+                      ]
+                    },
+                    "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create order with all items from particular cart",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Successful POST request\", function () {",
+                          "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                          "});",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "umq3X7TmR4x7CkqnQO6CL535pCAY60r9_lc_en_bg_FFFFFF_tb_3D46F5",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"sandbox\": true,\n    \"currency\": \"KRW\",\n    \"locale\": \"ko\",\n    \"country\": \"KR\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/payment/cart/001",
+                      "host": [
+                        "{{StoreAPIUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v2",
+                        "project",
+                        "{{project_id}}",
+                        "payment",
+                        "cart",
+                        "001"
+                      ]
+                    },
+                    "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create token for getting user token",
+                  "protocolProfileBehavior": {
+                    "disabledSystemHeaders": {
+                      "accept-encoding": true,
+                      "connection": true,
+                      "user-agent": true
+                    }
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "password",
+                          "value": "{{api_key}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "username",
+                          "value": "{{merchant_id}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"settings\": {\n    \"currency\": \"USD\",\n    \"language\": \"en\",\n    \"project_id\": {{project_id}},\n    //\"disable_saved_methods\": true, //whether saved methods on/off\n    \"mode\":\"sandbox\"\n    //\"payment_method\": 3678,\n    //\"external_id\":\"test100\"\n  },\n  \"user\": {\n    \"email\": {\n      \"value\": \"{{email}}\"\n    },\n    \"id\": {\n      \"value\": \"valsa\"\n    },\n    \"name\": {\n      \"value\": \"Peter Lee\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                      "host": [
+                        "{{BaseAPIUrl}}"
+                      ],
+                      "path": [
+                        "merchant",
+                        "v2",
+                        "merchants",
+                        "{{merchant_id}}",
+                        "token"
+                      ],
+                      "query": [
+                        {
+                          "key": "",
+                          "value": null,
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PLAYER INVENTORY",
+          "item": [
+            {
+              "name": "Get current user's inventory",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/user/inventory/items?limit=50&platform=xsolla",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "user",
+                    "inventory",
+                    "items"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50",
+                      "type": "text"
+                    },
+                    {
+                      "key": "platform",
+                      "value": "xsolla",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Get current user's virtual balance",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/user/virtual_currency_balance?platform=xsolla",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "user",
+                    "virtual_currency_balance"
+                  ],
+                  "query": [
+                    {
+                      "key": "platform",
+                      "value": "xsolla",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Consume item",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sku\": \"{{item_sku}}\",\n  \"quantity\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/user/inventory/item/consume",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "user",
+                    "inventory",
+                    "item",
+                    "consume"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "VIRTUAL ITEMS & CURRENCY",
+          "item": [
+            {
+              "name": "Get virtual item by SKU",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/items/virtual_items/sku/{{item_sku}}?locale=en&country=US&show_inactive_time_limited_items=0",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "items",
+                    "virtual_items",
+                    "sku",
+                    "{{item_sku}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "en"
+                    },
+                    {
+                      "key": "country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "show_inactive_time_limited_items",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "REWARD CHAINS & VALUE POINTS",
+          "item": [
+            {
+              "name": "Get current user's value point balance",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/user/reward_chain/227/balance",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "user",
+                    "reward_chain",
+                    "227",
+                    "balance"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Coupons",
+          "item": [
+            {
+              "name": "Generate coupon codes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "OPTIONS",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"count\": 5\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/coupon/{{external_id}}}code/generate",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "coupon",
+                    "{{external_id}}}code",
+                    "generate"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Get coupon codes",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/coupon/{{external_id}}/code?limits=50&offset=0",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "coupon",
+                    "{{external_id}}",
+                    "code"
+                  ],
+                  "query": [
+                    {
+                      "key": "limits",
+                      "value": "50",
+                      "type": "text"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Redeem coupon code",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful POST request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"coupon_code\": \"{{external_id}}\",\n  \"selected_unit_items\": {\n    \"game_1\": \"{{item_sku}}\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/coupon/redeem",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "coupon",
+                    "redeem"
+                  ]
+                },
+                "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "BUNDLE",
+          "item": [
+            {
+              "name": "Create bundle",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"sku\": \"2keys\",\n    \"name\": {\n      \"en-US\": \"2 keys\",\n      \"ko-KR\": \"키 2개\"\n    },\n    \"is_enabled\": true,\n    \"is_free\": true,\n    \"order\": 1,\n    \"long_description\": {\n      \"en-US\": \"2 keys\",\n      \"ko-KR\": \"키 2개\"\n    },\n    \"description\": {\n      \"en-US\": \"2 keys\",\n      \"ko-KR\": \"키 2개\"\n    },\n    \"groups\": [\n      \"test\"\n    ],\n    \"prices\": [\n      {\n        \"currency\": \"USD\",\n        \"amount\": 2,\n        \"is_default\": false,\n        \"is_enabled\": true\n      },\n      {\n        \"currency\": \"KRW\",\n        \"amount\": 2000,\n        \"is_default\": true,\n        \"is_enabled\": true\n      }\n    ],\n    \"content\": [\n      {\n        \"sku\": \"21b24bd780\",\n        \"quantity\": 2\n      }\n    ]\n  }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/items/bundle",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "items",
+                    "bundle"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Update bundle",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"item_id\": 810347,\n    \"sku\": \"2keyss\",\n    \"type\": \"bundle\",\n    \"name\": {\n        \"en\": \"2keys\"\n    },\n    \"bundle_type\": \"standard\",\n    \"description\": {\n        \"en\": \"2 keys for testing.\"\n    },\n    \"image_url\": \"https://cdn3.xsolla.com/img/misc/images/adccc704849ca054c3dcfbbc696320c1.jpg\",\n    \"regional_prices\": [],\n    \"prices\": [\n        {\n            \"amount\": 9.99,\n            \"currency\": \"USD\",\n            \"is_default\": true,\n            \"is_enabled\": true\n        },\n        {\n            \"amount\": 8.99,\n            \"currency\": \"EUR\",\n            \"is_default\": false,\n            \"is_enabled\": true\n        }\n    ],\n    \"virtual_prices\": [],\n    \"is_enabled\": true,\n    \"is_show_in_store\": true,\n    \"regions\": [],\n    \"limits\": {\n        \"per_user\": null,\n        \"per_item\": null,\n        \"recurrent_schedule\": null\n    },\n    \"periods\": [],\n    \"attributes\": [],\n    \"long_description\": null,\n    \"media_list\": [],\n    \"order\": 3,\n    \"is_free\": false,\n    \"groups\": [],\n    \"content\": [\n        {\n            \"sku\": \"Test_steam\",\n            \"quantity\": 2\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/items/bundle/sku/2keyss",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "items",
+                    "bundle",
+                    "sku",
+                    "2keyss"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Get bundle",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/admin/items/bundle/sku/2keyss",
+                  "host": [
+                    "{{StoreAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "admin",
+                    "items",
+                    "bundle",
+                    "sku",
+                    "2keyss"
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User management",
+          "item": [
+            {
+              "name": "Update server custom ID for user",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOltdLCJjbGllbnRfaWQiOjg3NTcsImV4cCI6MTc1MzA5MjU0NCwiaWF0IjoxNzUzMDg4OTQ0LCJpc3MiOiJodHRwczovL2xvZ2luLnhzb2xsYS5jb20iLCJqdGkiOiJhMWFjMWQwZi1iNWE5LTQ3ZTYtOWM1NS01NDlmMTE0OTc4OTkiLCJyZXNvdXJjZXMiOlt7Im5hbWUiOiJwdWJsaXNoZXJfaWQiLCJ2YWx1ZSI6IjE2ODUxIn1dLCJzY3AiOltdLCJzdWIiOiIiLCJ4c29sbGFfbG9naW5fcHJvamVjdF9pZCI6IjdkN2EwMmExLTA0MmEtMTFlYS05MjQ0LTQyMDEwYWE4MDAwNCJ9.20YEyneZ7cFpMvPOo89ieV8p3APzGhs3SgpheExfbN4",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"server_custom_id\": \"peter\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{LoginAPIUrl}}/api/projects/{{project_id}}/users/{{user_id}}/server_custom_id",
+                  "host": [
+                    "{{LoginAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "projects",
+                    "{{project_id}}",
+                    "users",
+                    "{{user_id}}",
+                    "server_custom_id"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "[OAuth2.0] Generate JWT",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful POST request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/x-www-form-urlencoded",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "text",
+                      "uuid": "4accd2ca-e16f-41f8-9853-134544a16d5a"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "8757",
+                      "type": "text",
+                      "uuid": "61feda9d-1354-422b-bfba-7f31808dd0f0"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "lzeIIqSOUgMDrlWN7RrWDddLOAUNQW7x",
+                      "type": "text",
+                      "uuid": "30269ebb-0ba1-4394-93a3-f6f998d5ee2b"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{LoginAPIUrl}}/api/oauth2/token",
+                  "host": [
+                    "{{LoginAPIUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "oauth2",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials ",
+                      "disabled": true
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "8757",
+                      "disabled": true
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "lzeIIqSOUgMDrlWN7RrWDddLOAUNQW7x",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Common",
+          "item": [
+            {
+              "name": "Get sellable items list",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "https://store.xsolla.com/api/v2/project/{{project_id}}/items",
+                  "protocol": "https",
+                  "host": [
+                    "store",
+                    "xsolla",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v2",
+                    "project",
+                    "{{project_id}}",
+                    "items"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SUBSCRIPTIONS MANAGEMENT",
+      "item": [
+        {
+          "name": "Subscriptions",
+          "item": [
+            {
+              "name": "Update Subscription",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Successful PUT request\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"status\": \"active\"  //\"active\" \"canceled\" \"non_renewing\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/users/{{user_id}}/subscriptions/109784601",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "projects",
+                    "{{project_id}}",
+                    "users",
+                    "{{user_id}}",
+                    "subscriptions",
+                    "109784601"
+                  ]
+                },
+                "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+              },
+              "response": []
+            },
+            {
+              "name": "Create token for Sub - basic",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"project_id\": {{project_id}}\n    //,\"mode\":\"sandbox\"\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    }\n  }\n  /*,\"purchase\":{\n    \"subscription\":{\n        \"plan_id\":\"58udbBq0\",\n        \"trial_days\": 30\n    }\n  }*/\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create token for Manage Sub",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"user_v1\": \"{{user_id}}\",\n    \"locale\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://subscriptions.xsolla.com/api/v1/projects/{{project_id}}/subscriptions/user_account",
+                  "protocol": "https",
+                  "host": [
+                    "subscriptions",
+                    "xsolla",
+                    "com"
+                  ],
+                  "path": [
+                    "api",
+                    "v1",
+                    "projects",
+                    "{{project_id}}",
+                    "subscriptions",
+                    "user_account"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create token for Sub",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"project_id\": {{project_id}}\n    ,\"mode\":\"sandbox\"\n    ,\"ui\":{\n        \"desktop\":{\n            \"header\":{\n                \"is_visible\": false\n            }\n            ,\"subscription_list\":{\n                \"display_local_price\": true // Not working\n                //,\"layout\":\"grid\"\n            }\n        }\n    }\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    }\n    ,\"country\":{\n        \"allow_modify\":false\n    }\n  }\n  ,\"purchase\":{\n    \"subscription\":{\n        //\"amount\": 100,\n        //\"currency\": \"KRW\",\n        \"plan_id\":\"58udbBq0\",\n        \"trial_days\": 30\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create token for change plan",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept-encoding": true,
+                  "connection": true,
+                  "user-agent": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"project_id\": {{project_id}}\n    ,\"mode\":\"sandbox\"\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    }\n  }\n  ,\"purchase\":{\n    \"subscription\":{\n        \"plan_id\": \"0pJjWSgC\",   //new plan_id \n        \"operation\": \"change_plan\" //required\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "key": "",
+                      "value": null,
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Payments",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/subscriptions/payments?user_id={{user_id}}",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "projects",
+                    "{{project_id}}",
+                    "subscriptions",
+                    "payments"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "{{user_id}}",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Get Subscriptions",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "basic",
+                  "basic": [
+                    {
+                      "key": "password",
+                      "value": "{{api_key}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{merchant_id}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/subscriptions?user_id={{user_id}}&status%5B%5D=active",
+                  "host": [
+                    "{{BaseAPIUrl}}"
+                  ],
+                  "path": [
+                    "merchant",
+                    "v2",
+                    "merchants",
+                    "{{merchant_id}}",
+                    "subscriptions"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "5",
+                      "disabled": true
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "{{user_id}}"
+                    },
+                    {
+                      "key": "plan_id",
+                      "value": "0pJjWSgC",
+                      "disabled": true
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "{{project_id}}",
+                      "disabled": true
+                    },
+                    {
+                      "key": "status%5B%5D",
+                      "value": "active",
+                      "description": "\"active\" \"canceled\" \"non_renewing\"",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+              },
+              "response": []
+            },
+            {
+              "name": "Create token for management with JWT",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "umq3e0GnKPhkGoRo01ohx08MiPiX8UIR_bg_FFFFFF_tb_3D46F5",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"settings\": {\r\n    \"ui\": {\r\n      \"size\": \"large\",\r\n      \"theme\": \"string\",\r\n      \"version\": \"desktop\",\r\n      \"desktop\": {\r\n        \"header\": {\r\n          \"is_visible\": true,\r\n          \"visible_logo\": true,\r\n          \"visible_name\": true,\r\n          \"type\": \"compact\",\r\n          \"close_button\": true\r\n        }\r\n      },\r\n      \"mobile\": {\r\n        \"mode\": \"saved_accounts\",\r\n        \"footer\": {\r\n          \"is_visible\": true\r\n        },\r\n        \"header\": {\r\n          \"close_button\": true\r\n        }\r\n      },\r\n      \"license_url\": \"string\",\r\n      \"mode\": \"user_account\",\r\n      \"user_account\": {\r\n        \"history\": {\r\n          \"enable\": true,\r\n          \"order\": 1\r\n        },\r\n        \"payment_accounts\": {\r\n          \"enable\": true,\r\n          \"order\": 1\r\n        },\r\n        \"info\": {\r\n          \"enable\": true,\r\n          \"order\": 1\r\n        },\r\n        \"subscriptions\": {\r\n          \"enable\": true,\r\n          \"order\": 1\r\n        }\r\n      }\r\n    },\r\n    \"currency\": \"str\",\r\n    \"locale\": \"st\",\r\n    \"external_id\": \"string\",\r\n    \"payment_method\": 1,\r\n    \"return_url\": \"string\",\r\n    \"redirect_policy\": {\r\n      \"redirect_conditions\": \"none\",\r\n      \"delay\": 0,\r\n      \"status_for_manual_redirection\": \"none\",\r\n      \"redirect_button_caption\": \"string\"\r\n    }\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "https://subscriptions.xsolla.com​/api/user/v1/projects/{{project_id}}/subscriptions/manage",
+                  "protocol": "https",
+                  "host": [
+                    "subscriptions",
+                    "xsolla",
+                    "com​"
+                  ],
+                  "path": [
+                    "api",
+                    "user",
+                    "v1",
+                    "projects",
+                    "{{project_id}}",
+                    "subscriptions",
+                    "manage"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Custom_Provider",
+      "item": [
+        {
+          "name": "custom_provider_step1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/info",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "info"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "The others",
+      "item": [
+        {
+          "name": "Get payment method",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/payment_systems/pi_search.json?countries=JP&status=on&offset=0&limit=20&name=&regions&categories&currencies=JPY&additional_charges_from=0&additional_charges_to=3&payrank_country",
+              "host": [
+                "{{BaseAPIUrl}}"
+              ],
+              "path": [
+                "merchant",
+                "v2",
+                "projects",
+                "{{project_id}}",
+                "payment_systems",
+                "pi_search.json"
+              ],
+              "query": [
+                {
+                  "key": "countries",
+                  "value": "JP"
+                },
+                {
+                  "key": "status",
+                  "value": "on"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "name",
+                  "value": ""
+                },
+                {
+                  "key": "regions",
+                  "value": null
+                },
+                {
+                  "key": "categories",
+                  "value": null
+                },
+                {
+                  "key": "currencies",
+                  "value": "JPY"
+                },
+                {
+                  "key": "additional_charges_from",
+                  "value": "0"
+                },
+                {
+                  "key": "additional_charges_to",
+                  "value": "3"
+                },
+                {
+                  "key": "payrank_country",
+                  "value": null,
+                  "type": "text"
+                }
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "Update PayRank",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\n    {\n        \"id\": 3050,\n        \"name\": \"Korean bank card\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3050.1657783500.png\",\n        \"fixed\": true\n    },\n    {\n        \"id\": 3552,\n        \"name\": \"Toss\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3552.1693381611.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3563,\n        \"name\": \"Naver Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3563.1695710342.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 1380,\n        \"name\": \"Bank card\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/1380.1730356830.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3555,\n        \"name\": \"KakaoPay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3555.1666252977.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3638,\n        \"name\": \"Xsolla Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3638.1732547339.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3556,\n        \"name\": \"Payco\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3556.1673243749.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 2544,\n        \"name\": \"Culture Land\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/2544.1680756713.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 1738,\n        \"name\": \"Mobile payment\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/1738.1732280194.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3175,\n        \"name\": \"Apple Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3175.1720088579.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3053,\n        \"name\": \"Tmoney\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3053.1597299827.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3356,\n        \"name\": \"Eggmoney\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3356.1597300023.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 2580,\n        \"name\": \"UnionPay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/2580.1732178496.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3431,\n        \"name\": \"Google Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3431.1732279200.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3051,\n        \"name\": \"Korean Banking\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3051.1589803365.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3353,\n        \"name\": \"SMART문상\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3353.1597300061.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 2682,\n        \"name\": \"BitPay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/2682.1721024207.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 235,\n        \"name\": \"Amazon Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/235.1719918532.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3054,\n        \"name\": \"CashBee\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3054.1597300071.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 1032,\n        \"name\": \"TeenCash\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/1032.1587644970.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3675,\n        \"name\": \"Crypto.com Pay\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3675.1720518533.png\",\n        \"fixed\": false\n    },\n    {\n        \"id\": 3484,\n        \"name\": \"SkinsCash\",\n        \"image_url\": \"//cdn3.xsolla.com/paymentoptions/paystation/theme_33/108x63/3484.1716894471.png\",\n        \"fixed\": false\n    }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseAPIUrl}}/merchant/current/projects/{{project_id}}/payment_systems/pay_rank/countries/KR",
+              "host": [
+                "{{BaseAPIUrl}}"
+              ],
+              "path": [
+                "merchant",
+                "current",
+                "projects",
+                "{{project_id}}",
+                "payment_systems",
+                "pay_rank",
+                "countries",
+                "KR"
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update payment method",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"payment_systems_ids\":[3702,3737],\n    \"enabled\":false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseAPIUrl}}/merchant/v2/projects/{{project_id}}/payment_systems/toggle",
+              "host": [
+                "{{BaseAPIUrl}}"
+              ],
+              "path": [
+                "merchant",
+                "v2",
+                "projects",
+                "{{project_id}}",
+                "payment_systems",
+                "toggle"
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Update bad email domain",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Hook-Proxy",
+      "item": [
+        {
+          "name": "Transaction cancelation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": 280295,\n  \"external_id\": \"test001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://xfe.xsolla.com/api/transaction/cancel",
+              "protocol": "https",
+              "host": [
+                "xfe",
+                "xsolla",
+                "com"
+              ],
+              "path": [
+                "api",
+                "transaction",
+                "cancel"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Create token for basic",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "accept-encoding": true,
+              "connection": true,
+              "user-agent": true
+            }
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"settings\": {\n    \"project_id\": 280295\n    ,\"mode\":\"sandbox\"\n    ,\"external_id\":\"test002\"  //It is reqired value.\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"{{user_id}}\"\n    }\n  },\n  \"purchase\":{\n    \"checkout\":{\n        \"amount\": 100,\n        \"currency\": \"KRW\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+              "host": [
+                "{{BaseAPIUrl}}"
+              ],
+              "path": [
+                "merchant",
+                "v2",
+                "merchants",
+                "{{merchant_id}}",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SB",
+      "item": [
+        {
+          "name": "sb-user-id-service.xsolla.com",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"loginId\": \"7d7a02a1-042a-11ea-9244-42010aa80004\",\n \"settings\": {\n   \"projectId\": 228774,\n   \"merchantId\": 16851\n },\n \"user\": {\n   \"id\": \"1234\",\n   \"name\": null, //every values working well - null, \"\"\n   \"country\": \"KR\"\n },\n \"operationPayload\": \"eyJ1c2VyIjp7ImlkIjoiMTIzNCIsImNvdW50cnkiOiJLUiJ9fQ%3D%3D\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://sb-user-id-service.xsolla.com/api/v1/user-id/token",
+              "protocol": "https",
+              "host": [
+                "sb-user-id-service",
+                "xsolla",
+                "com"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user-id",
+                "token"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Xsolla event API",
+      "item": [
+        {
+          "name": "Create order with specified item",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sandbox\": true,\n  \"quantity\": 1,\n  \"settings\": {\n    \"ui\": {\n      \"theme\": \"63295a9a2e47fab76f7708e1\",\n      \"desktop\": {\n        \"header\": {\n          \"is_visible\": true,\n          \"visible_logo\": true,\n          \"visible_name\": true,\n          \"visible_purchase\": true,\n          \"type\": \"normal\",\n          \"close_button\": false\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{StoreAPIUrl}}/api/v2/project/{{project_id}}/payment/item/{{item_sku}}",
+              "host": [
+                "{{StoreAPIUrl}}"
+              ],
+              "path": [
+                "api",
+                "v2",
+                "project",
+                "{{project_id}}",
+                "payment",
+                "item",
+                "{{item_sku}}"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Get unprocessed event list for user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://getupdate.xsolla.com/events?token=fiu4tenFhLBPvZD8vtrtwVy0kJnbvaDY_bg_E9ACE7_tb_3D46F5",
+              "protocol": "https",
+              "host": [
+                "getupdate",
+                "xsolla",
+                "com"
+              ],
+              "path": [
+                "events"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "fiu4tenFhLBPvZD8vtrtwVy0kJnbvaDY_bg_E9ACE7_tb_3D46F5"
+                }
+              ]
+            },
+            "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+          },
+          "response": []
+        },
+        {
+          "name": "Mark event as processed",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful PUT request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "https://getupdate.xsolla.com/events/212/processed?token=fiu4tenFhLBPvZD8vtrtwVy0kJnbvaDY_bg_E9ACE7_tb_3D46F5",
+              "protocol": "https",
+              "host": [
+                "getupdate",
+                "xsolla",
+                "com"
+              ],
+              "path": [
+                "events",
+                "212",
+                "processed"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "fiu4tenFhLBPvZD8vtrtwVy0kJnbvaDY_bg_E9ACE7_tb_3D46F5"
+                },
+                {
+                  "key": "key",
+                  "value": "payment",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Create token for basic",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "accept-encoding": true,
+              "connection": true,
+              "user-agent": true
+            }
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{merchant_id}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"settings\": {\n    \"project_id\": 285110\n    ,\"mode\":\"sandbox\"\n  },\n  \"user\": {\n    \"id\": {\n      \"value\": \"4321\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseAPIUrl}}/merchant/v2/merchants/{{merchant_id}}/token",
+              "host": [
+                "{{BaseAPIUrl}}"
+              ],
+              "path": [
+                "merchant",
+                "v2",
+                "merchants",
+                "{{merchant_id}}",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Get data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/info?id=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "info"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/info",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "info"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful POST request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/info",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "info"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Update data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful PUT request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/info?id=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "info"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Successful DELETE request\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+              "});",
+              ""
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/info?id=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "info"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        },
+        "description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+      },
+      "response": []
+    },
+    {
+      "name": "Babka button (54) - https://paycoreapi.srv.local/api/v1/tools/settings/project/toggle",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "YS5jaGVvbmc6TG9va2F0bWVOT1cxMzUhIQ==",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": 279417,\n    \"settingId\": 54,\n    \"value\": \"0\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://paycoreapi.srv.local/api/v1/tools/settings/project/toggle\n",
+          "protocol": "https",
+          "host": [
+            "paycoreapi",
+            "srv",
+            "local"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "tools",
+            "settings",
+            "project",
+            "toggle\n"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BaseAPIUrl",
+      "value": "https://api.xsolla.com"
+    },
+    {
+      "key": "StoreAPIUrl",
+      "value": "https://store.xsolla.com"
+    },
+    {
+      "key": "LoginAPIUrl",
+      "value": "https://login.xsolla.com",
+      "type": "default"
+    },
+    {
+      "key": "Xsolla InternalSettings Alice",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
